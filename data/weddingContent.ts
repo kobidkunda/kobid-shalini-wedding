@@ -76,7 +76,7 @@ export const weddingContent = {
       heading: "Three beautiful days, one unforgettable beginning.",
       body: "Mark the moments that lead Kobid and Shalini into their forever.",
       events: [
-        { date: "02 May 2026", day: "Saturday", title: "Bachelor Celebration", text: "An intimate evening of joy, laughter, and blessings before the sacred ceremonies begin." },
+        { date: "01 May 2026", day: "Friday", title: "Bachelor Celebration", text: "An intimate evening of joy, laughter, and blessings before the sacred ceremonies begin." },
         { date: "03 May 2026", day: "Sunday", title: "Marriage Ceremony", text: "The auspicious wedding day, where two hearts and two families become one." },
         { date: "05 May 2026", day: "Tuesday", title: "Reception", text: "A graceful evening of togetherness, blessings, music, and celebration at BIOLASTIC." }
       ]
@@ -195,7 +195,7 @@ export const weddingContent = {
       heading: "तीन सुंदर दिन, एक यादगार शुरुआत।",
       body: "कोबिद और शालिनी के नए जीवन की ओर बढ़ते इन खास पलों को संजोएँ।",
       events: [
-        { date: "02 मई 2026", day: "शनिवार", title: "बैचलर उत्सव", text: "पावन रस्मों से पहले खुशी, हँसी और आशीर्वाद से भरी एक आत्मीय शाम।" },
+        { date: "01 मई 2026", day: "शुक्रवार", title: "बैचलर उत्सव", text: "पावन रस्मों से पहले खुशी, हँसी और आशीर्वाद से भरी एक आत्मीय शाम।" },
         { date: "03 मई 2026", day: "रविवार", title: "विवाह समारोह", text: "शुभ विवाह दिवस, जब दो दिल और दो परिवार एक पवित्र बंधन में जुड़ते हैं।" },
         { date: "05 मई 2026", day: "मंगलवार", title: "रिसेप्शन", text: "BIOLASTIC में साथ, आशीर्वाद, संगीत और उत्सव से सजी गरिमामयी संध्या।" }
       ]
@@ -289,7 +289,7 @@ export const weddingContent = {
       heading: "তিনটি সুন্দর দিন, এক অবিস্মরণীয় শুরু।",
       body: "কোবিদ ও শালিনীর নতুন জীবনের পথে এগিয়ে চলা বিশেষ মুহূর্তগুলি।",
       events: [
-        { date: "০২ মে ২০২৬", day: "শনিবার", title: "ব্যাচেলর উদ্‌যাপন", text: "পবিত্র অনুষ্ঠানের আগে আনন্দ, হাসি ও আশীর্বাদে ভরা এক আন্তরিক সন্ধ্যা।" },
+        { date: "০১ মে ২০২৬", day: "শুক্রবার", title: "ব্যাচেলর উদ্‌যাপন", text: "পবিত্র অনুষ্ঠানের আগে আনন্দ, হাসি ও আশীর্বাদে ভরা এক আন্তরিক সন্ধ্যা।" },
         { date: "০৩ মে ২০২৬", day: "রবিবার", title: "বিবাহ অনুষ্ঠান", text: "শুভ বিবাহের দিন, যখন দুই হৃদয় ও দুই পরিবার এক পবিত্র বন্ধনে যুক্ত হয়।" },
         { date: "০৫ মে ২০২৬", day: "মঙ্গলবার", title: "রিসেপশন", text: "BIOLASTIC-এ আপনজন, আশীর্বাদ, সঙ্গীত ও আনন্দে ভরা এক সুন্দর সন্ধ্যা।" }
       ]

@@ -4,8 +4,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Kobid & Shalini | Wedding Reception Invitation",
-  description: "Join us in celebrating the wedding reception of Kobid and Shalini on May 4, 2025 at Hotel Nandan, Barasat, West Bengal. A memorable evening of love, joy, and togetherness awaits.",
-  keywords: ["wedding invitation", "Kobid Shalini wedding", "wedding reception", "Barasat wedding", "May 4 2025 wedding", "Hotel Nandan", "Bengali wedding", "wedding celebration"],
+  description: "Join us in celebrating the wedding reception of Kobid and Shalini on May 5, 2026 at BIOLASTIC, Sukantapally, Ward No. 33, Siliguri. A memorable evening of love, joy, and togetherness awaits.",
+  keywords: ["wedding invitation", "Kobid Shalini wedding", "wedding reception", "Siliguri wedding", "May 5 2026 wedding", "BIOLASTIC", "Bengali wedding", "wedding celebration"],
   authors: [{ name: "Kobid & Shalini" }],
   creator: "Kobid & Shalini",
   publisher: "Kobid & Shalini",
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
     url: "https://kobid-shalini-wedding.netlify.app",
     siteName: "Kobid & Shalini Wedding",
     title: "Kobid & Shalini | Wedding Reception Invitation",
-    description: "Join us in celebrating the wedding reception of Kobid and Shalini on May 4, 2025 at Hotel Nandan, Barasat, West Bengal.",
+    description: "Join us in celebrating the wedding reception of Kobid and Shalini on May 5, 2026 at BIOLASTIC, Sukantapally, Siliguri.",
     images: [
       {
         url: "https://kobid-shalini-wedding.netlify.app/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Kobid and Shalini Wedding Reception Invitation - May 4 2025 at Hotel Nandan Barasat",
+        alt: "Kobid and Shalini Wedding Reception Invitation - May 5 2026 at BIOLASTIC Siliguri",
         type: "image/png",
       },
       {
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Kobid & Shalini | Wedding Reception Invitation",
-    description: "Join us in celebrating the wedding reception of Kobid and Shalini on May 4, 2025 at Hotel Nandan, Barasat, West Bengal.",
+    description: "Join us in celebrating the wedding reception of Kobid and Shalini on May 5, 2026 at BIOLASTIC, Sukantapally, Siliguri.",
     images: ["https://kobid-shalini-wedding.netlify.app/og-image.png"],
   },
   alternates: {
@@ -118,9 +118,9 @@ export default function RootLayout({
         <link rel="preload" as="video" href="/video/mobile_video_bg.mp4" type="video/mp4" media="(max-width: 760px)" />
         <link rel="preload" as="video" href="/video/1_output_1777166813935022_iEqPaVidu.mp4" type="video/mp4" media="(min-width: 761px)" />
         <meta name="geo.region" content="IN-WB" />
-        <meta name="geo.placename" content="Barasat, West Bengal" />
-        <meta name="geo.position" content="22.72;88.48" />
-        <meta name="ICBM" content="22.72, 88.48" />
+        <meta name="geo.placename" content="Siliguri, West Bengal" />
+        <meta name="geo.position" content="26.72;88.43" />
+        <meta name="ICBM" content="26.72, 88.43" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -129,25 +129,25 @@ export default function RootLayout({
               "@type": "WeddingEvent",
               "name": "Kobid & Shalini Wedding Reception",
               "description": "Wedding reception celebration for Kobid and Shalini",
-              "startDate": "2025-05-04T18:00:00+05:30",
-              "endDate": "2025-05-04T23:00:00+05:30",
+              "startDate": "2026-05-05T18:00:00+05:30",
+              "endDate": "2026-05-05T23:00:00+05:30",
               "eventStatus": "https://schema.org/EventScheduled",
               "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
               "location": {
                 "@type": "Place",
-                "name": "Hotel Nandan",
+                "name": "BIOLASTIC",
                 "address": {
                   "@type": "PostalAddress",
-                  "streetAddress": "Barasat, West Bengal",
-                  "addressLocality": "Barasat",
+                  "streetAddress": "Sukantapally, Ward No. 33",
+                  "addressLocality": "Siliguri",
                   "addressRegion": "West Bengal",
                   "addressCountry": "IN",
-                  "postalCode": "700124"
+                  "postalCode": "734005"
                 },
                 "geo": {
                   "@type": "GeoCoordinates",
-                  "latitude": "22.72",
-                  "longitude": "88.48"
+                  "latitude": "26.72",
+                  "longitude": "88.43"
                 }
               },
               "image": [
