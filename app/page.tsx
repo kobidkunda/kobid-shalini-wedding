@@ -19,8 +19,6 @@ import {
   Play,
   Send,
   Sparkles,
-  Trash2,
-  Upload,
   UsersRound,
   Volume2,
   VolumeX
@@ -358,7 +356,7 @@ function GalleryModal({ selected, onClose }: { selected: GalleryImage | null; on
   return mounted ? createPortal(modal, document.body) : null;
 }
 
-function GalleryCard({ image, index, onClick, onDelete }: { image: GalleryImage; index: number; onClick: (img: GalleryImage) => void; onDelete?: (id: string) => void }) {
+function GalleryCard({ image, index, onClick }: { image: GalleryImage; index: number; onClick: (img: GalleryImage) => void }) {
   return (
     <motion.figure
       className="gallery-card"
@@ -385,15 +383,6 @@ function GalleryCard({ image, index, onClick, onDelete }: { image: GalleryImage;
         <div className="gallery-card-overlay">
           <Expand size={24} />
         </div>
-        {onDelete && (
-          <button
-            className="gallery-card-delete"
-            onClick={(e) => { e.stopPropagation(); onDelete(image.id); }}
-            aria-label="Delete photo"
-          >
-            <Trash2 size={16} />
-          </button>
-        )}
         <span className="gallery-card-glint" aria-hidden="true" />
       </div>
     </motion.figure>
@@ -576,8 +565,6 @@ export default function WeddingInvitationPage() {
   const [rsvpSent, setRsvpSent] = useState(false);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [uploadedImages, setUploadedImages] = useState<GalleryImage[]>([]);
-  const [uploading, setUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const heroRef = useRef<HTMLElement | null>(null);
 
@@ -599,33 +586,6 @@ export default function WeddingInvitationPage() {
       })
       .catch(() => {});
   }, []);
-
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      const fd = new FormData();
-      fd.append("image", file);
-      const res = await fetch("/api/gallery/upload", { method: "POST", body: fd });
-      const data = await res.json();
-      if (data.ok) {
-        setUploadedImages((prev) => [
-          ...prev,
-          { id: data.id, small: `/api/gallery/${data.id}?size=small`, big: `/api/gallery/${data.id}`, caption: file.name },
-        ]);
-      }
-    } catch {}
-    setUploading(false);
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  };
-
-  const handleDelete = async (id: string) => {
-    try {
-      await fetch(`/api/gallery/${id}`, { method: "DELETE" });
-      setUploadedImages((prev) => prev.filter((img) => img.id !== id));
-    } catch {}
-  };
 
   const allGalleryImages = [...memoriesMomentsImages, ...uploadedImages];
 
@@ -985,18 +945,10 @@ export default function WeddingInvitationPage() {
               image={image}
               index={index}
               onClick={setSelectedImage}
-              onDelete={uploadedImages.some((u) => u.id === image.id) ? handleDelete : undefined}
               key={image.id}
             />
           ))}
         </motion.div>
-        <div className="gallery-upload-area">
-          <input ref={fileInputRef} type="file" accept="image/*" onChange={handleUpload} hidden id="gallery-upload" />
-          <label htmlFor="gallery-upload" className="gallery-upload-btn">
-            <Upload size={18} />
-            <span>{uploading ? "Uploading..." : "Add Photo"}</span>
-          </label>
-        </div>
         <GalleryModal selected={selectedImage} onClose={() => setSelectedImage(null)} />
       </section>
 
