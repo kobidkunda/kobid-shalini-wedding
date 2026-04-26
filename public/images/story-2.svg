@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#385831"/><stop offset="0.46" stop-color="#192013"/><stop offset="1" stop-color="#071108"/></linearGradient>
+    <radialGradient id="sun" cx="68%" cy="18%" r="45%"><stop offset="0" stop-color="#f0d58e" stop-opacity="0.72"/><stop offset=".35" stop-color="#d8b06a" stop-opacity="0.24"/><stop offset="1" stop-opacity="0"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+  <rect width="900" height="1100" fill="url(#g)"/>
+  <rect width="900" height="1100" fill="url(#sun)"/>
+  <g opacity=".9"><path d="M0 640 C170 560 250 650 390 570 C555 470 670 560 900 455 L900 1100 L0 1100Z" fill="#152617"/><path d="M0 760 C210 660 328 770 520 680 C690 600 780 670 900 610 L900 1100 L0 1100Z" fill="#0d1a10"/><path d="M0 875 C230 775 420 875 610 790 C750 730 820 780 900 740 L900 1100 L0 1100Z" fill="#071108"/></g>
+  <g filter="url(#blur)" opacity=".7"><ellipse cx="340" cy="300" rx="260" ry="70" fill="#e7d4a6" opacity=".18"/><ellipse cx="610" cy="410" rx="320" ry="78" fill="#f3d888" opacity=".12"/></g>
+  <g opacity=".8"><circle cx="135" cy="150" r="3" fill="#f4d98d"/><circle cx="620" cy="244" r="2" fill="#f4d98d"/><circle cx="740" cy="780" r="2.5" fill="#f4d98d"/><circle cx="260" cy="860" r="2" fill="#f4d98d"/></g>
+  <g transform="translate(450 520)" opacity=".92"><circle cx="-55" cy="-78" r="42" fill="#c89a71"/><path d="M-96-78c12-50 75-59 96-23 10 18 4 37-4 55-18-25-55-31-92-32Z" fill="#191411"/><circle cx="65" cy="-72" r="40" fill="#bd8a62"/><path d="M24-67c-8-55 21-82 68-70 38 9 51 59 29 91-23-25-57-25-97-21Z" fill="#17120f"/><path d="M-120 0c20-45 100-49 132 0l10 250h-170Z" fill="#eee0c2" opacity=".93"/><path d="M12 5c29-51 112-46 140 3l42 257H-18Z" fill="#d8b06a" opacity=".93"/></g>
+  <rect x="38" y="38" width="824" height="1024" rx="42" fill="none" stroke="#e8ca86" stroke-opacity=".24"/>
+  <text x="70" y="988" fill="#f6ead2" opacity=".9" font-size="48" font-family="serif">Two Families</text><text x="72" y="1035" fill="#e8ca86" opacity=".8" font-size="22" font-family="Arial" letter-spacing="3">ONE CELEBRATION</text>
+</svg>
