@@ -3529,37 +3529,90 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border-radius: 999px;
   font-size: 14px;
   font-family: inherit;
   text-decoration: none;
-  transition: background 0.25s, transform 0.2s;
+  transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    120deg,
+    rgba(197, 160, 40, 0.15) 0%,
+    rgba(197, 160, 40, 0.25) 50%,
+    rgba(197, 160, 40, 0.15) 100%
+  );
+  border: 1px solid rgba(197, 160, 40, 0.4);
+  color: #fff8d0;
+  box-shadow:
+    0 0 20px rgba(197, 160, 40, 0.2),
+    inset 0 1px 0 rgba(255, 248, 208, 0.1);
+}
+
+.calendar-link-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 248, 208, 0.25) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .calendar-link-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 0 30px rgba(197, 160, 40, 0.35),
+    inset 0 1px 0 rgba(255, 248, 208, 0.15);
+  border-color: rgba(197, 160, 40, 0.6);
+}
+
+.calendar-link-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.calendar-link-btn span {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(197, 160, 40, 0.5);
 }
 
 .calendar-link-btn.apple {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff8d0;
-}
-
-.calendar-link-btn.apple:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(
+    120deg,
+    rgba(197, 160, 40, 0.12) 0%,
+    rgba(197, 160, 40, 0.22) 50%,
+    rgba(197, 160, 40, 0.12) 100%
+  );
 }
 
 .calendar-link-btn.google {
-  background: rgba(66, 133, 244, 0.12);
-  border: 1px solid rgba(66, 133, 244, 0.25);
-  color: #fff8d0;
-}
-
-.calendar-link-btn.google:hover {
-  background: rgba(66, 133, 244, 0.22);
+  background: linear-gradient(
+    120deg,
+    rgba(197, 160, 40, 0.12) 0%,
+    rgba(197, 160, 40, 0.22) 50%,
+    rgba(197, 160, 40, 0.12) 100%
+  );
 }
 
 .calendar-link-icon {

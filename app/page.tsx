@@ -1042,7 +1042,8 @@ export default function WeddingInvitationPage() {
               </motion.div>
             </section>
 
-            <motion.div className="calendar-links" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={revealContainer}>
+            <section className="section calendar-section">
+<motion.div className="calendar-links" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={revealContainer}>
               <motion.p variants={fadeUp} className="calendar-links-label">Add to your calendar</motion.p>
               <motion.div variants={fadeUp} className="calendar-links-row">
                 <a href="https://www.icloud.com/invites/02bF4mJDz4PnNuZliYnVsNVpA" target="_blank" rel="noreferrer" className="calendar-link-btn apple">
@@ -1055,6 +1056,7 @@ export default function WeddingInvitationPage() {
                 </a>
               </motion.div>
             </motion.div>
+</section>
 
 <footer className="footer-section">
         <p>{t.footer.quote}</p>
