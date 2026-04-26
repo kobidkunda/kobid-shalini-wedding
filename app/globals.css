@@ -3501,3 +3501,70 @@ body {
     opacity: 0.3;
   }
 }
+
+.calendar-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 48px 20px 32px;
+}
+
+.calendar-links-label {
+  font-size: 14px;
+  color: #c5a028;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.calendar-links-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.calendar-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-family: inherit;
+  text-decoration: none;
+  transition: background 0.25s, transform 0.2s;
+  cursor: pointer;
+}
+
+.calendar-link-btn:hover {
+  transform: translateY(-2px);
+}
+
+.calendar-link-btn.apple {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff8d0;
+}
+
+.calendar-link-btn.apple:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.calendar-link-btn.google {
+  background: rgba(66, 133, 244, 0.12);
+  border: 1px solid rgba(66, 133, 244, 0.25);
+  color: #fff8d0;
+}
+
+.calendar-link-btn.google:hover {
+  background: rgba(66, 133, 244, 0.22);
+}
+
+.calendar-link-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  object-fit: contain;
+}

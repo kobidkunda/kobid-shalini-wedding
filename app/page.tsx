@@ -1042,6 +1042,20 @@ export default function WeddingInvitationPage() {
               </motion.div>
             </section>
 
+            <motion.div className="calendar-links" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={revealContainer}>
+              <motion.p variants={fadeUp} className="calendar-links-label">Add to your calendar</motion.p>
+              <motion.div variants={fadeUp} className="calendar-links-row">
+                <a href="https://www.icloud.com/invites/02bF4mJDz4PnNuZliYnVsNVpA" target="_blank" rel="noreferrer" className="calendar-link-btn apple">
+                  <img src="https://help.apple.com/assets/66EA017DBE4810D8A20B961B/66EC5F80F484F869ED057588/en_GB/073ffc308387aa1b0631635b1b35ae29.png" alt="Apple Invites" className="calendar-link-icon" />
+                  <span>Add to Apple Invites</span>
+                </a>
+                <a href="https://calendar.app.google/vm3aTyRuje1zQjAF8" target="_blank" rel="noreferrer" className="calendar-link-btn google">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/1280px-Google_Calendar_icon_%282020%29.svg.png" alt="Google Calendar" className="calendar-link-icon" />
+                  <span>Add to Google Calendar</span>
+                </a>
+              </motion.div>
+            </motion.div>
+
 <footer className="footer-section">
         <p>{t.footer.quote}</p>
         <Heart size={18} fill="currentColor" />
