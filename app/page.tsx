@@ -1,7 +1,9 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import Image from "next/image";
 import {
   CalendarDays,
   ChevronDown,
@@ -40,7 +42,20 @@ const revealContainer = {
   }
 };
 
-const DISABLE_INITIAL_INVITATION_POPUP = true;
+const letterReveal = {
+  hidden: { opacity: 0, y: 28, rotateX: -18, filter: "blur(10px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+  }
+};
+
+const glowTap = { scale: 0.97 };
+
+const DISABLE_INITIAL_INVITATION_POPUP = false;
 
 const dustParticles = [
   { left: 7, top: 22, delay: 0.2, duration: 8, drift: 12, size: 3 },
@@ -143,13 +158,14 @@ function CinematicLight() {
 }
 
 function GoldenDust({ className = "" }: { className?: string }) {
+  const reduceMotion = useReducedMotion();
   return (
     <div className={`golden-dust ${className}`} aria-hidden="true">
       {dustParticles.map((p, i) => (
         <motion.span
           key={`${p.left}-${p.top}`}
           style={{ left: `${p.left}%`, top: `${p.top}%`, width: p.size, height: p.size }}
-          animate={{
+          animate={reduceMotion ? { opacity: 0.35 } : {
             y: [0, -58, 0],
             x: [0, p.drift, 0],
             opacity: [0, 0.78, 0],
@@ -163,6 +179,9 @@ function GoldenDust({ className = "" }: { className?: string }) {
 }
 
 function FallingPetals() {
+  const reduceMotion = useReducedMotion();
+  if (reduceMotion) return null;
+
   return (
     <div className="petal-layer" aria-hidden="true">
       {petals.map((p) => (
@@ -192,7 +211,9 @@ function ParallaxGalleryItem({ src, index, caption }: { src: string; index: numb
       whileHover={{ y: -5, scale: 1.012 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
     >
-      <motion.img src={src} alt={`Wedding gallery placeholder ${index + 1}`} whileHover={{ scale: 1.065 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }} />
+      <motion.div className="gallery-item-image" whileHover={{ scale: 1.065 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
+        <Image src={src} alt={`Wedding gallery placeholder ${index + 1}`} fill sizes="(max-width: 760px) 50vw, 22vw" />
+      </motion.div>
       {caption ? <figcaption>{caption}</figcaption> : null}
     </motion.figure>
   );
@@ -218,6 +239,8 @@ function LanguageSwitch({ locale, setLocale, compact = false }: { locale: Locale
 }
 
 function SectionTitle({ label, title, body }: { label: string; title?: string; body?: string }) {
+  const words = title?.split(" ");
+
   return (
     <motion.div
       className="section-title"
@@ -229,16 +252,45 @@ function SectionTitle({ label, title, body }: { label: string; title?: string; b
       <motion.div variants={fadeUp} className="eyebrow small">
         <Sparkles size={14} /> {label}
       </motion.div>
-      {title ? <motion.h2 variants={fadeUp}>{title}</motion.h2> : null}
+      {title ? (
+        <motion.h2 className="split-title" variants={revealContainer} aria-label={title}>
+          {words?.map((word, index) => (
+            <motion.span variants={letterReveal} className="split-word" aria-hidden="true" key={`${word}-${index}`}>
+              {word}
+            </motion.span>
+          ))}
+        </motion.h2>
+      ) : null}
       {body ? <motion.p variants={fadeUp}>{body}</motion.p> : null}
     </motion.div>
   );
 }
 
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.35 });
+  return <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />;
+}
+
 function GalleryModal({ selected, onClose }: { selected: GalleryImage | null; onClose: () => void }) {
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!selected) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selected]);
+
+  useEffect(() => {
+    if (!selected) return;
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -250,7 +302,7 @@ function GalleryModal({ selected, onClose }: { selected: GalleryImage | null; on
     if (e.target === overlayRef.current) onClose();
   };
 
-  return (
+  const modal = (
     <AnimatePresence>
       {selected && (
         <motion.div
@@ -276,13 +328,20 @@ function GalleryModal({ selected, onClose }: { selected: GalleryImage | null; on
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
-            <motion.img
-              src={selected.big}
-              alt={selected.caption || "Gallery image"}
+            <motion.div
+              className="gallery-modal-image"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-            />
+            >
+              <Image
+                src={selected.big}
+                alt={selected.caption || "Gallery image"}
+                width={1080}
+                height={1620}
+                sizes="(max-width: 760px) 92vw, 70vw"
+              />
+            </motion.div>
             {selected.caption && (
               <motion.figcaption initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
                 {selected.caption}
@@ -293,6 +352,8 @@ function GalleryModal({ selected, onClose }: { selected: GalleryImage | null; on
       )}
     </AnimatePresence>
   );
+
+  return mounted ? createPortal(modal, document.body) : null;
 }
 
 function GalleryCard({ image, index, onClick }: { image: GalleryImage; index: number; onClick: (img: GalleryImage) => void }) {
@@ -304,24 +365,56 @@ function GalleryCard({ image, index, onClick }: { image: GalleryImage; index: nu
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.1 }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -10, scale: 1.025, rotate: index % 2 === 0 ? -0.4 : 0.4 }}
+      whileTap={glowTap}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onClick={() => onClick(image)}
       style={{ cursor: "pointer" }}
     >
       <div className="gallery-card-image-wrapper">
-        <motion.img
-          src={image.small}
-          alt={image.caption || `Wedding memory ${index + 1}`}
-          loading="lazy"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        />
+        <motion.div className="gallery-card-image" whileHover={{ scale: 1.08 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
+          <Image
+            src={image.small}
+            alt={image.caption || `Wedding memory ${index + 1}`}
+            fill
+            sizes="(max-width: 768px) 46vw, (max-width: 1024px) 30vw, 25vw"
+          />
+        </motion.div>
         <div className="gallery-card-overlay">
           <Expand size={24} />
         </div>
+        <span className="gallery-card-glint" aria-hidden="true" />
       </div>
     </motion.figure>
+  );
+}
+
+function TimelineCard({ event, index }: { event: { date: string; day: string; title: string; text: string }; index: number }) {
+  const cardRef = useRef<HTMLElement | null>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start 82%", "end 36%"] });
+  const lift = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [18, -10]);
+  const glow = useTransform(scrollYProgress, [0, 0.5, 1], [0.15, 0.55, 0.24]);
+  const nodeScale = useTransform(scrollYProgress, [0, 0.45, 1], reduceMotion ? [1, 1, 1] : [0.88, 1.08, 1]);
+
+  return (
+    <motion.article
+      ref={cardRef}
+      className="timeline-card"
+      variants={fadeUp}
+      whileHover={{ y: -8, scale: 1.012 }}
+      style={{ y: lift, "--timeline-glow": glow.get() } as any}
+    >
+      <motion.div className="timeline-node" style={{ scale: nodeScale }}>
+        <span>{String(index + 1).padStart(2, "0")}</span>
+      </motion.div>
+      <div className="timeline-date">
+        <b>{event.date}</b>
+        <small>{event.day}</small>
+      </div>
+      <h3>{event.title}</h3>
+      <p>{event.text}</p>
+    </motion.article>
   );
 }
 
@@ -332,7 +425,7 @@ function VideoBackground({ bgScale, bgY }: { bgScale: any; bgY: any }) {
   useEffect(() => {
     const checkMobile = () => {
       const isMobile = window.innerWidth <= 760;
-      const newSrc = isMobile ? "/video/mobile_bg_video.mp4" : "/video/1_output_1777166813935022_iEqPaVidu.mp4";
+      const newSrc = isMobile ? "/video/mobile_video_bg.mp4" : "/video/1_output_1777166813935022_iEqPaVidu.mp4";
       setSrc(newSrc);
     };
     checkMobile();
@@ -449,7 +542,8 @@ export default function WeddingInvitationPage() {
 
   return (
     <main className="site-shell">
-      <audio ref={audioRef} src="/audio/ambient.wav" loop preload="auto" />
+      <ScrollProgress />
+      <audio ref={audioRef} src="/video/bgsong.mp3" loop preload="auto" />
       <FallingPetals />
 
       <AnimatePresence>
@@ -464,12 +558,30 @@ export default function WeddingInvitationPage() {
               <source src="/video/hero-bg.mp4" type="video/mp4" />
             </video>
             <div className="entry-overlay" />
+            <motion.div
+              className="entry-aurora"
+              aria-hidden="true"
+              animate={{ x: ["-6%", "5%", "-6%"], opacity: [0.36, 0.58, 0.36] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
             <FloatingParticles />
             <LanguageSwitch locale={locale} setLocale={setLocale} />
 
-            <motion.div className="entry-card" initial="hidden" animate="show" variants={revealContainer}>
+            <motion.div
+              className="entry-card"
+              initial={{ opacity: 0, y: 34, scale: 0.96, filter: "blur(18px)" }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.div
+                className="entry-orbit"
+                aria-hidden="true"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div initial="hidden" animate="show" variants={revealContainer}>
               <motion.div variants={fadeUp} className="entry-monogram">
-                {meta.monogram}
+                <Image src="/images/kobid-shalini_2.png" alt="Kobid and Shalini" width={88} height={88} priority sizes="88px" />
               </motion.div>
               <motion.div variants={fadeUp} className="sacred-lines">
                 <span>{t.open.sacred1}</span>
@@ -486,12 +598,18 @@ export default function WeddingInvitationPage() {
                 <span><CalendarDays size={15} /> {t.open.date}</span>
                 <span><MapPin size={15} /> {t.open.venue}</span>
               </motion.div>
-              <motion.button variants={fadeUp} className="gold-button big" onClick={enterInvitation} type="button">
+              <motion.div variants={fadeUp} className="entry-vow-line" aria-hidden="true">
+                <span />
+                <Heart size={14} fill="currentColor" />
+                <span />
+              </motion.div>
+              <motion.button variants={fadeUp} className="gold-button big motion-cta" whileHover={{ y: -4, scale: 1.025 }} whileTap={glowTap} onClick={enterInvitation} type="button">
                 <Expand size={18} /> {t.open.button}
               </motion.button>
               <motion.p variants={fadeUp} className="entry-hint">
                 <Music2 size={14} /> {t.open.hint}
               </motion.p>
+              </motion.div>
             </motion.div>
           </motion.section>
         )}
@@ -525,12 +643,12 @@ export default function WeddingInvitationPage() {
 
       <header className="navbar">
         <a className="logo" href="#home" aria-label="Home">
-          <img src="/images/kobid-shalini_2.png" alt="Kobid & Shalini" className="logo-img" width="40" height="40" />
+          <Image src="/images/kobid-shalini_2.png" alt="Kobid & Shalini" className="logo-img" width={80} height={80} priority sizes="80px" />
         </a>
                 <nav>
                   {navLinks.map((item) => <a href={item.href} key={item.href}>{item.label}</a>)}
                 </nav>
-                <a href="#rsvp" className="nav-rsvp">RSVP Now <Heart size={14} /></a>
+                <motion.a href="#rsvp" className="nav-rsvp motion-cta" whileHover={{ y: -3, scale: 1.03 }} whileTap={glowTap}>RSVP Now <Heart size={14} /></motion.a>
               </header>
 
               <div className="hero-inner">
@@ -594,13 +712,21 @@ export default function WeddingInvitationPage() {
                     {t.hero.quote}
                   </motion.p>
                   <motion.div variants={fadeUp} className="hero-actions">
-                    <a href="#story" className="gold-button">{t.hero.primary}</a>
-                    <a href="#rsvp" className="ghost-button">{t.hero.secondary} <Heart size={16} /></a>
+                    <motion.a href="#story" className="gold-button motion-cta" whileHover={{ y: -4, scale: 1.025 }} whileTap={glowTap}>{t.hero.primary}</motion.a>
+                    <motion.a href="#rsvp" className="ghost-button motion-cta" whileHover={{ y: -4, scale: 1.025 }} whileTap={glowTap}>{t.hero.secondary} <Heart size={16} /></motion.a>
                   </motion.div>
                 </motion.div>
 
                 <motion.div className="hero-visual" initial={{ opacity: 0, x: 60, filter: "blur(12px)" }} animate={{ opacity: 1, x: 0, filter: "blur(0px)" }} transition={{ delay: 0.35, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}>
-                  <img src="/images/header/top_header.jpg" alt="Kobid and Shalini cinematic portrait" />
+                  <Image
+                    src="/images/header/top_header.jpg"
+                    alt="Kobid and Shalini cinematic portrait"
+                    className="hero-couple-image"
+                    width={760}
+                    height={1032}
+                    priority
+                    sizes="(max-width: 1080px) 82vw, 48vw"
+                  />
                   <div className="watch-card">
                     <button type="button" aria-label="Play story">
                       <motion.span
@@ -657,7 +783,9 @@ export default function WeddingInvitationPage() {
                 <motion.div className="story-cards" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={revealContainer}>
                   {t.story.cards.map((card) => (
                     <motion.article className="story-card" key={card.number} variants={fadeUp} whileHover={{ y: -8, scale: 1.015 }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}>
-                      <motion.img src={card.image} alt={card.title} whileHover={{ scale: 1.08 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} />
+                      <motion.div className="story-card-image" whileHover={{ scale: 1.08 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+                        <Image src={card.image} alt={card.title} fill sizes="(max-width: 760px) 100vw, (max-width: 1080px) 33vw, 22vw" />
+                      </motion.div>
                       <motion.div className="card-shade" whileHover={{ opacity: 0.86 }} />
                       <motion.span
                         className="card-number"
@@ -675,6 +803,16 @@ export default function WeddingInvitationPage() {
                   ))}
                 </motion.div>
               </div>
+            </section>
+
+            <section id="timeline" className="section timeline-section">
+              <GoldenDust />
+              <SectionTitle label={t.timeline.label} title={t.timeline.heading} body={t.timeline.body} />
+              <motion.div className="timeline-track" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.24 }} variants={revealContainer}>
+                {t.timeline.events.map((event, index) => (
+                  <TimelineCard event={event} index={index} key={event.title} />
+                ))}
+              </motion.div>
             </section>
 
       <section id="gallery" className="section gallery-section">
@@ -780,12 +918,13 @@ export default function WeddingInvitationPage() {
 
       <footer className="footer-section">
         <div className="footer-monogram-wrap">
-          <img
+          <Image
             src="/images/kobid-shalini_2.png"
             alt="Kobid & Shalini"
             className="footer-logo-img"
-            width="80"
-            height="80"
+            width={94}
+            height={94}
+            sizes="94px"
           />
         </div>
               <p>{t.footer.quote}</p>

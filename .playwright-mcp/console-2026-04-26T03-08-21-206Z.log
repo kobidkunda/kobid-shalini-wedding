@@ -1,0 +1,7 @@
+[     125ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://192.168.88.81:3003/_next/static/css/app/layout.css?v=1777172901245:0
+[     125ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://192.168.88.81:3003/manifest.json:0
+[     204ms] [ERROR] Manifest fetch from http://192.168.88.81:3003/manifest.json failed, code 404 @ http://192.168.88.81:3003/:0
+[     246ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://192.168.88.81:3003/_next/static/chunks/main-app.js?v=1777172901245:0
+[     250ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://192.168.88.81:3003/_next/static/chunks/webpack.js?v=1777172901245:0
+[     252ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://192.168.88.81:3003/_next/static/chunks/app-pages-internals.js:0
+[     255ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://192.168.88.81:3003/_next/static/chunks/app/page.js:0

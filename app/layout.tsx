@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -87,9 +88,9 @@ export const metadata: Metadata = {
     google: "google-site-verification-code",
   },
   other: {
-    "msapplication-TileColor": "#E11D48",
+    "msapplication-TileColor": "#07100A",
     "msapplication-TileImage": "/images/kobid-shalini_2.png",
-    "theme-color": "#E11D48",
+    "theme-color": "#07100A",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
     "apple-mobile-web-app-title": "Kobid & Shalini Wedding",
@@ -101,8 +102,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#E11D48" },
-    { media: "(prefers-color-scheme: dark)", color: "#881337" },
+    { media: "(prefers-color-scheme: light)", color: "#07100A" },
+    { media: "(prefers-color-scheme: dark)", color: "#050905" },
   ],
   colorScheme: "light dark",
 };
@@ -117,6 +118,8 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preload" as="video" href="/video/mobile_video_bg.mp4" type="video/mp4" media="(max-width: 760px)" />
+        <link rel="preload" as="video" href="/video/1_output_1777166813935022_iEqPaVidu.mp4" type="video/mp4" media="(min-width: 761px)" />
         <meta name="geo.region" content="IN-WB" />
         <meta name="geo.placename" content="Barasat, West Bengal" />
         <meta name="geo.position" content="22.72;88.48" />
@@ -193,7 +196,18 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-5872R2CJ44" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5872R2CJ44');
+          `}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }

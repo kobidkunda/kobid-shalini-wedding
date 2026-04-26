@@ -71,6 +71,16 @@ export const weddingContent = {
       { number: "03", title: "Forever Begins", text: "An evening of love, laughter, blessings, and togetherness.", image: "/images/gallery/memories-moments/big/img10.jpg" }
     ]
     },
+    timeline: {
+      label: "Celebration Timeline",
+      heading: "Three beautiful days, one unforgettable beginning.",
+      body: "Mark the moments that lead Kobid and Shalini into their forever.",
+      events: [
+        { date: "02 May 2026", day: "Saturday", title: "Bachelor Celebration", text: "An intimate evening of joy, laughter, and blessings before the sacred ceremonies begin." },
+        { date: "03 May 2026", day: "Sunday", title: "Marriage Ceremony", text: "The auspicious wedding day, where two hearts and two families become one." },
+        { date: "05 May 2026", day: "Tuesday", title: "Reception", text: "A graceful evening of togetherness, blessings, music, and celebration at BIOLASTIC." }
+      ]
+    },
     gallery: {
       label: "Curated Gallery",
       heading: "Memories & Moments",
@@ -180,6 +190,16 @@ export const weddingContent = {
         { number: "03", title: "सदा साथ", text: "प्रेम, हँसी, आशीर्वाद और अपनापन।", image: "/images/story-3-photo.webp" }
       ]
     },
+    timeline: {
+      label: "उत्सव की समयरेखा",
+      heading: "तीन सुंदर दिन, एक यादगार शुरुआत।",
+      body: "कोबिद और शालिनी के नए जीवन की ओर बढ़ते इन खास पलों को संजोएँ।",
+      events: [
+        { date: "02 मई 2026", day: "शनिवार", title: "बैचलर उत्सव", text: "पावन रस्मों से पहले खुशी, हँसी और आशीर्वाद से भरी एक आत्मीय शाम।" },
+        { date: "03 मई 2026", day: "रविवार", title: "विवाह समारोह", text: "शुभ विवाह दिवस, जब दो दिल और दो परिवार एक पवित्र बंधन में जुड़ते हैं।" },
+        { date: "05 मई 2026", day: "मंगलवार", title: "रिसेप्शन", text: "BIOLASTIC में साथ, आशीर्वाद, संगीत और उत्सव से सजी गरिमामयी संध्या।" }
+      ]
+    },
     gallery: { label: "गैलरी", heading: "यादें और पल", description: "उन मुस्कानों और पलों की झलक, जो इस सुंदर उत्सव तक लेकर आए।", button: "पूरी गैलरी देखें" },
     details: {
       label: "विवाह विवरण",
@@ -262,6 +282,16 @@ export const weddingContent = {
         { number: "01", title: "শুভ সূচনা", text: "পরিবার, বিশ্বাস ও ভালোবাসায় সাজানো যাত্রা।", image: "/images/story-1-photo.webp" },
         { number: "02", title: "দুই পরিবার, এক আনন্দ", text: "এক সুন্দর বন্ধনকে আশীর্বাদ করার মিলন।", image: "/images/story-2-photo.webp" },
         { number: "03", title: "চিরদিনের শুরু", text: "ভালোবাসা, হাসি, আশীর্বাদ ও আপনজনের সন্ধ্যা।", image: "/images/story-3-photo.webp" }
+      ]
+    },
+    timeline: {
+      label: "উৎসবের সময়রেখা",
+      heading: "তিনটি সুন্দর দিন, এক অবিস্মরণীয় শুরু।",
+      body: "কোবিদ ও শালিনীর নতুন জীবনের পথে এগিয়ে চলা বিশেষ মুহূর্তগুলি।",
+      events: [
+        { date: "০২ মে ২০২৬", day: "শনিবার", title: "ব্যাচেলর উদ্‌যাপন", text: "পবিত্র অনুষ্ঠানের আগে আনন্দ, হাসি ও আশীর্বাদে ভরা এক আন্তরিক সন্ধ্যা।" },
+        { date: "০৩ মে ২০২৬", day: "রবিবার", title: "বিবাহ অনুষ্ঠান", text: "শুভ বিবাহের দিন, যখন দুই হৃদয় ও দুই পরিবার এক পবিত্র বন্ধনে যুক্ত হয়।" },
+        { date: "০৫ মে ২০২৬", day: "মঙ্গলবার", title: "রিসেপশন", text: "BIOLASTIC-এ আপনজন, আশীর্বাদ, সঙ্গীত ও আনন্দে ভরা এক সুন্দর সন্ধ্যা।" }
       ]
     },
     gallery: { label: "গ্যালারি", heading: "স্মৃতি ও মুহূর্ত", description: "হাসি, আশীর্বাদ ও সুন্দর মুহূর্তের এক ঝলক।", button: "সম্পূর্ণ গ্যালারি দেখুন" },

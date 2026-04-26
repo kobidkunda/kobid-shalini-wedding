@@ -1,0 +1,266 @@
+- main [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic "Language selector" [ref=e6]:
+        - img [ref=e7]
+        - button "EN" [ref=e11]
+        - button "हिं" [ref=e12]
+        - button "বাং" [ref=e13]
+      - button "Audio Off" [ref=e14]:
+        - img [ref=e15]
+        - text: Audio Off
+    - generic [ref=e19]:
+      - generic [ref=e21]:
+        - link "Home" [ref=e22] [cursor=pointer]:
+          - /url: "#home"
+          - img "Kobid & Shalini" [ref=e23]
+        - navigation [ref=e24]:
+          - link "Home" [ref=e25] [cursor=pointer]:
+            - /url: "#home"
+          - link "Our Story" [ref=e26] [cursor=pointer]:
+            - /url: "#story"
+          - link "Wedding Details" [ref=e27] [cursor=pointer]:
+            - /url: "#details"
+          - link "Curated Gallery" [ref=e28] [cursor=pointer]:
+            - /url: "#gallery"
+          - link "RSVP" [ref=e29] [cursor=pointer]:
+            - /url: "#rsvp"
+        - link "RSVP Now" [ref=e30] [cursor=pointer]:
+          - /url: "#rsvp"
+          - text: RSVP Now
+          - img [ref=e31]
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: Sri Sri Radha GobindaShree Shree Prajapataye Namah
+          - paragraph [ref=e36]: Together with their families
+          - heading "Kobid&Shalini" [level=1] [ref=e37]:
+            - generic [ref=e38]: Kobid
+            - emphasis [ref=e39]: "&"
+            - generic [ref=e40]: Shalini
+          - generic [ref=e41]:
+            - generic [ref=e42]:
+              - img [ref=e43]
+              - text: Tuesday · 05 May 2026
+            - generic [ref=e45]:
+              - img [ref=e46]
+              - text: Evening Onwards
+            - generic [ref=e49]:
+              - img [ref=e50]
+              - text: BIOLASTIC, Siliguri
+          - paragraph [ref=e53]: Two souls. One journey. A forever kind of love.
+          - generic [ref=e54]:
+            - link "Open Invitation" [ref=e55] [cursor=pointer]:
+              - /url: "#story"
+            - link "RSVP Now" [ref=e56] [cursor=pointer]:
+              - /url: "#rsvp"
+              - text: RSVP Now
+              - img [ref=e57]
+        - generic [ref=e59]:
+          - img "Kobid and Shalini cinematic portrait" [ref=e60]
+          - generic [ref=e61]:
+            - button "Play story" [ref=e62]:
+              - img [ref=e63]
+            - strong [ref=e65]: Watch Our Story
+            - text: A film by our hearts02:45
+      - generic [ref=e66]:
+        - text: We're celebrating in
+        - generic [ref=e67]: 0Days
+        - generic [ref=e68]: 00Hours
+        - generic [ref=e69]: 00Minutes
+        - generic [ref=e70]: 00Seconds
+    - generic [ref=e72]:
+      - img "Decorative floral artwork" [ref=e74]
+      - generic [ref=e75]:
+        - paragraph [ref=e76]:
+          - img [ref=e77]
+          - text: Sacred Invitation
+        - generic [ref=e79]: Sri Sri Radha GobindaShree Shree Prajapataye Namah
+        - paragraph [ref=e80]: Sri Arun Kumar Kunda and Smt. Sunanda Kunda cordially request the pleasure of your gracious presence and blessings on the auspicious occasion of the Wedding Reception of their elder son.
+        - generic [ref=e81]:
+          - strong [ref=e82]: Kobid
+          - emphasis [ref=e83]: Weds
+          - strong [ref=e84]: Shalini
+        - paragraph [ref=e85]: Daughter of Late Ravi Shankar and Mrs. Hira Shahi of Basundhara Abasan, “A” Block, Behind Uttor Kanya, Siliguri – 734015.
+        - paragraph [ref=e86]: Your gracious presence and blessings will make this celebration truly special.
+    - generic [ref=e88]:
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - img [ref=e91]
+          - text: Our Story
+        - heading "Every love story is beautiful, but ours begins with blessings." [level=2] [ref=e93]
+        - paragraph [ref=e94]: With the blessings of Sri Sri Radha Gobinda and our beloved families, Kobid and Shalini begin a beautiful journey of togetherness, love, and lifelong companionship. As they step into this new chapter, we invite you to join us, bless the couple, and celebrate an evening filled with joy, warmth, and memories.
+      - generic [ref=e95]:
+        - article [ref=e96]:
+          - img "Blessed Beginnings" [ref=e97]
+          - text: "01"
+          - generic [ref=e98]:
+            - heading "Blessed Beginnings" [level=3] [ref=e99]
+            - paragraph [ref=e100]: A journey guided by family, faith, and love.
+        - article [ref=e101]:
+          - img "Two Families, One Celebration" [ref=e102]
+          - text: "02"
+          - generic [ref=e103]:
+            - heading "Two Families, One Celebration" [level=3] [ref=e104]
+            - paragraph [ref=e105]: Coming together to bless a beautiful new bond.
+        - article [ref=e106]:
+          - img "Forever Begins" [ref=e107]
+          - text: "03"
+          - generic [ref=e108]:
+            - heading "Forever Begins" [level=3] [ref=e109]
+            - paragraph [ref=e110]: An evening of love, laughter, blessings, and togetherness.
+    - generic [ref=e111]:
+      - generic [ref=e112]:
+        - generic [ref=e113]:
+          - img [ref=e114]
+          - text: Curated Gallery
+        - heading "Memories & Moments" [level=2] [ref=e116]
+        - paragraph [ref=e117]: A glimpse into the smiles, blessings, and memories that lead us to this beautiful celebration.
+      - generic [ref=e118]:
+        - figure [ref=e119] [cursor=pointer]:
+          - generic [ref=e120]:
+            - img "Memory 1"
+            - img [ref=e122]
+        - figure [ref=e127] [cursor=pointer]:
+          - generic [ref=e128]:
+            - img "Memory 2"
+            - img [ref=e130]
+        - figure [ref=e135] [cursor=pointer]:
+          - generic [ref=e136]:
+            - img "Memory 3"
+            - img [ref=e138]
+        - figure [ref=e143] [cursor=pointer]:
+          - generic [ref=e144]:
+            - img "Memory 4"
+            - img [ref=e146]
+        - figure [ref=e151] [cursor=pointer]:
+          - generic [ref=e152]:
+            - img "Memory 5"
+            - img [ref=e154]
+        - figure [ref=e159] [cursor=pointer]:
+          - generic [ref=e160]:
+            - img "Memory 6"
+            - img [ref=e162]
+        - figure [ref=e167] [cursor=pointer]:
+          - generic [ref=e168]:
+            - img "Memory 7"
+            - img [ref=e170]
+        - figure [ref=e175] [cursor=pointer]:
+          - generic [ref=e176]:
+            - img "Memory 9"
+            - img [ref=e178]
+        - figure [ref=e183] [cursor=pointer]:
+          - generic [ref=e184]:
+            - img "Memory 10"
+            - img [ref=e186]
+        - figure [ref=e191] [cursor=pointer]:
+          - generic [ref=e192]:
+            - img "Memory 11"
+            - img [ref=e194]
+        - figure [ref=e199] [cursor=pointer]:
+          - generic [ref=e200]:
+            - img "Memory 12"
+            - img [ref=e202]
+        - figure [ref=e207] [cursor=pointer]:
+          - generic [ref=e208]:
+            - img "Memory 13"
+            - img [ref=e210]
+        - figure [ref=e215] [cursor=pointer]:
+          - generic [ref=e216]:
+            - img "Memory 14"
+            - img [ref=e218]
+        - figure [ref=e223] [cursor=pointer]:
+          - generic [ref=e224]:
+            - img "Memory 15"
+            - img [ref=e226]
+        - figure [ref=e231] [cursor=pointer]:
+          - generic [ref=e232]:
+            - img "Memory 16"
+            - img [ref=e234]
+        - figure [ref=e239] [cursor=pointer]:
+          - generic [ref=e240]:
+            - img "Memory 17"
+            - img [ref=e242]
+    - generic [ref=e247]:
+      - generic [ref=e249]:
+        - img [ref=e250]
+        - text: Wedding Details
+      - generic [ref=e252]:
+        - article [ref=e253]:
+          - img [ref=e255]
+          - heading "Reception" [level=3] [ref=e258]
+          - paragraph [ref=e259]: Tuesday, 05 May 2026
+          - text: Evening Onwards
+        - article [ref=e260]:
+          - img [ref=e262]
+          - heading "Date" [level=3] [ref=e264]
+          - paragraph [ref=e265]: 05 May 2026
+          - text: Tuesday
+        - article [ref=e266]:
+          - img [ref=e268]
+          - heading "Time" [level=3] [ref=e271]
+          - paragraph [ref=e272]: Evening
+          - text: Reception Onwards
+        - article [ref=e273]:
+          - img [ref=e275]
+          - heading "Venue" [level=3] [ref=e278]
+          - paragraph [ref=e279]: BIOLASTIC
+          - text: Sukantapally, Ward No. 33, Siliguri – 734005
+        - article [ref=e280]:
+          - img [ref=e282]
+          - heading "Blessings" [level=3] [ref=e284]
+          - paragraph [ref=e285]: Your presence is requested
+          - text: To bless the newlywed couple
+        - article [ref=e286]:
+          - img "Map placeholder" [ref=e287]
+          - link "View On Map" [ref=e288] [cursor=pointer]:
+            - /url: https://maps.google.com/?q=BIOLASTIC%20Sukantapally%20Ward%20No%2033%20Siliguri
+    - generic [ref=e289]:
+      - generic [ref=e291]:
+        - img [ref=e292]
+        - text: Family Blessings
+      - generic [ref=e294]:
+        - article [ref=e295]:
+          - img [ref=e296]
+          - heading "Groom's Family" [level=3] [ref=e300]
+          - paragraph [ref=e301]: Kobid, elder son of Sri Arun Kumar Kunda and Smt. Sunanda Kunda.
+        - article [ref=e302]:
+          - img [ref=e303]
+          - heading "Bride's Family" [level=3] [ref=e305]
+          - paragraph [ref=e306]: Shalini, daughter of Late Ravi Shankar and Mrs. Hira Shahi of Basundhara Abasan, “A” Block, Behind Uttor Kanya, Siliguri – 734015.
+    - generic [ref=e308]:
+      - generic [ref=e309]:
+        - img "Floral illustration" [ref=e312]
+        - paragraph [ref=e313]:
+          - img [ref=e314]
+          - text: Kindly Respond
+        - heading "Will you join us on our special evening?" [level=2] [ref=e316]
+        - paragraph [ref=e317]: Your gracious presence and blessings will make our celebration complete. Please confirm your presence and let us know how many guests will be joining.
+      - generic [ref=e318]:
+        - textbox "Your Name" [ref=e319]
+        - textbox "Mobile Number" [ref=e320]
+        - generic [ref=e321]:
+          - combobox "Will you attend?" [ref=e322]:
+            - option "Will you attend?" [disabled] [selected]
+            - option "Yes, I will attend"
+            - option "Sorry, I cannot attend"
+          - img [ref=e323]
+        - generic [ref=e325]:
+          - combobox "Number of Guests" [ref=e326]:
+            - option "Number of Guests" [disabled] [selected]
+            - option "1 Guest"
+            - option "2 Guests"
+            - option "3 Guests"
+            - option "4 Guests"
+            - option "5+ Guests"
+          - img [ref=e327]
+        - textbox "Leave a Message" [ref=e329]
+        - button "Send Your RSVP" [ref=e330]:
+          - img [ref=e331]
+          - text: Send Your RSVP
+    - generic [ref=e334]:
+      - img "Kobid & Shalini" [ref=e336]
+      - paragraph [ref=e337]: With love, blessings, and togetherness, we look forward to celebrating this special evening with you.
+      - img [ref=e338]
+      - text: With Warm Regards
+      - strong [ref=e340]: The Kunda Family
+      - text: Kobid & Shalini

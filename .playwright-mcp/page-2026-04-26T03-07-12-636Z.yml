@@ -1,0 +1,189 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - navigation [ref=e4]:
+        - generic [ref=e5]:
+          - generic [ref=e6]: translate
+          - generic [ref=e7]: VoiceTranslate
+        - generic [ref=e8]:
+          - link "Product" [ref=e9] [cursor=pointer]:
+            - /url: "#"
+          - link "Features" [ref=e10] [cursor=pointer]:
+            - /url: "#features"
+          - link "Pricing" [ref=e11] [cursor=pointer]:
+            - /url: "#pricing"
+        - generic [ref=e12]:
+          - link "Login" [ref=e13] [cursor=pointer]:
+            - /url: /login
+          - link "Get Started" [ref=e14] [cursor=pointer]:
+            - /url: /register
+    - main [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e19]: v2.0 Now Enterprise Ready
+        - heading "Real-time Voice Translation" [level=1] [ref=e20]
+        - paragraph [ref=e21]: Global communication without boundaries. Instant, accurate voice translation and cloning for modern enterprise teams.
+        - generic [ref=e22]:
+          - link "Start Free" [ref=e23] [cursor=pointer]:
+            - /url: /register
+          - button "Watch Demo" [ref=e24]
+        - generic [ref=e26]: "[Dashboard Preview]"
+      - generic [ref=e28]:
+        - paragraph [ref=e29]: Trusted by industry leaders
+        - generic [ref=e30]:
+          - generic [ref=e31]: GLOBAL
+          - generic [ref=e32]: NEXUS
+          - generic [ref=e33]: ORBIT
+          - generic [ref=e34]: STRATUS
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - heading "Precision-engineered features" [level=2] [ref=e37]
+          - paragraph [ref=e38]: Built for scale, privacy, and clinical accuracy in every conversation.
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: record_voice_over
+            - heading "Live Translation" [level=3] [ref=e42]
+            - paragraph [ref=e43]: Zero-latency translation for video calls and live meetings across 95+ languages.
+          - generic [ref=e44]:
+            - generic [ref=e45]: settings_voice
+            - heading "Voice Cloning" [level=3] [ref=e46]
+            - paragraph [ref=e47]: Maintain your unique vocal signature across every language with high-fidelity cloning.
+          - generic [ref=e48]:
+            - generic [ref=e49]: shield
+            - heading "Enterprise Security" [level=3] [ref=e50]
+            - paragraph [ref=e51]: SOC2 Type II compliant with end-to-end encryption for all audio processing.
+          - generic [ref=e52]:
+            - generic [ref=e53]: campaign
+            - heading "Campaign Management" [level=3] [ref=e54]
+            - paragraph [ref=e55]: Automated outbound dialing with contact lists, scheduling, and AMD detection.
+          - generic [ref=e56]:
+            - generic [ref=e57]: subtitles
+            - heading "Real-time Transcripts" [level=3] [ref=e58]
+            - paragraph [ref=e59]: Live transcript panels with original and translated text side by side.
+          - generic [ref=e60]:
+            - generic [ref=e61]: analytics
+            - heading "Analytics" [level=3] [ref=e62]
+            - paragraph [ref=e63]: Comprehensive dashboards for call metrics, latency tracking, and quality monitoring.
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - heading "How it works" [level=2] [ref=e67]
+          - paragraph [ref=e68]: Start translating in minutes with our streamlined setup.
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - generic [ref=e71]: "1"
+            - heading "Integrate Audio" [level=3] [ref=e72]
+            - paragraph [ref=e73]: Connect your communication platform or upload audio files via our secure API.
+          - generic [ref=e74]:
+            - generic [ref=e75]: "2"
+            - heading "Select Target" [level=3] [ref=e76]
+            - paragraph [ref=e77]: Choose from 95+ languages and configure voice cloning settings for your brand.
+          - generic [ref=e78]:
+            - generic [ref=e79]: "3"
+            - heading "Real-time Stream" [level=3] [ref=e80]
+            - paragraph [ref=e81]: Receive perfectly translated audio streams with under 150ms of latency.
+      - generic [ref=e82]:
+        - generic [ref=e83]:
+          - heading "Simple, transparent pricing" [level=2] [ref=e84]
+          - paragraph [ref=e85]: Choose the plan that fits your communication needs.
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - heading "Basic" [level=3] [ref=e88]
+            - generic [ref=e89]: $49/mo
+            - list [ref=e90]:
+              - listitem [ref=e91]:
+                - generic [ref=e92]: check
+                - text: 10 Hours/mo
+              - listitem [ref=e93]:
+                - generic [ref=e94]: check
+                - text: 20 Languages
+              - listitem [ref=e95]:
+                - generic [ref=e96]: check
+                - text: Standard Voice
+            - button "Get Started" [ref=e97]
+          - generic [ref=e98]:
+            - generic [ref=e99]: Most Popular
+            - heading "Pro" [level=3] [ref=e100]
+            - generic [ref=e101]: $199/mo
+            - list [ref=e102]:
+              - listitem [ref=e103]:
+                - generic [ref=e104]: check
+                - text: 100 Hours/mo
+              - listitem [ref=e105]:
+                - generic [ref=e106]: check
+                - text: All Languages
+              - listitem [ref=e107]:
+                - generic [ref=e108]: check
+                - text: Voice Cloning
+              - listitem [ref=e109]:
+                - generic [ref=e110]: check
+                - text: Priority Support
+            - button "Get Started" [ref=e111]
+          - generic [ref=e112]:
+            - heading "Enterprise" [level=3] [ref=e113]
+            - generic [ref=e114]: Custom
+            - list [ref=e115]:
+              - listitem [ref=e116]:
+                - generic [ref=e117]: check
+                - text: Unlimited Use
+              - listitem [ref=e118]:
+                - generic [ref=e119]: check
+                - text: Dedicated Hosting
+              - listitem [ref=e120]:
+                - generic [ref=e121]: check
+                - text: SLA Guarantees
+              - listitem [ref=e122]:
+                - generic [ref=e123]: check
+                - text: Custom API
+            - button "Contact Sales" [ref=e124]
+      - generic [ref=e126]:
+        - heading "Ready to break language barriers?" [level=2] [ref=e127]
+        - paragraph [ref=e128]: Join over 10,000+ companies translating with VoiceTranslate.
+        - generic [ref=e129]:
+          - textbox "Enter your business email" [ref=e130]
+          - button "Start Free" [ref=e131]
+    - contentinfo [ref=e132]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e135]:
+            - generic [ref=e136]: translate
+            - generic [ref=e137]: VoiceTranslate
+          - paragraph [ref=e138]: The premier platform for real-time multilingual enterprise communication.
+        - generic [ref=e139]:
+          - heading "Product" [level=4] [ref=e140]
+          - list [ref=e141]:
+            - listitem [ref=e142]:
+              - link "Features" [ref=e143] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e144]:
+              - link "Integrations" [ref=e145] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e146]:
+              - link "Pricing" [ref=e147] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e148]:
+          - heading "Support" [level=4] [ref=e149]
+          - list [ref=e150]:
+            - listitem [ref=e151]:
+              - link "Documentation" [ref=e152] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e153]:
+              - link "API Status" [ref=e154] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e155]:
+              - link "Security" [ref=e156] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e157]:
+          - heading "Company" [level=4] [ref=e158]
+          - list [ref=e159]:
+            - listitem [ref=e160]:
+              - link "About Us" [ref=e161] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e162]:
+              - link "Privacy Policy" [ref=e163] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e164]:
+              - link "Terms of Service" [ref=e165] [cursor=pointer]:
+                - /url: "#"
+      - paragraph [ref=e167]: © 2024 VoiceTranslate. All rights reserved.
+  - button "Open Next.js Dev Tools" [ref=e173] [cursor=pointer]:
+    - img [ref=e174]
+  - alert [ref=e177]
