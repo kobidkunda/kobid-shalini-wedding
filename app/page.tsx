@@ -458,6 +458,106 @@ function VideoBackground({ bgScale, bgY }: { bgScale: any; bgY: any }) {
   );
 }
 
+function EntryVideoBackground() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [src, setSrc] = useState("/video/1_output_1777168878361973_cvuyLMCrG.mp4");
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobile = window.innerWidth <= 760;
+      const newSrc = isMobile ? "/video/mobile_video_bg.mp4" : "/video/1_output_1777168878361973_cvuyLMCrG.mp4";
+      setSrc(newSrc);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      videoRef.current.play().catch(() => {});
+    }
+  }, [src]);
+
+  return (
+    <motion.video
+      ref={videoRef}
+      className="entry-video-bg"
+      autoPlay
+      muted
+      loop
+      playsInline
+      src={src}
+    />
+  );
+}
+
+function ShimmerText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={`shimmer-text ${className}`}>
+      {children}
+      <span className="shimmer-overlay" />
+    </span>
+  );
+}
+
+function AnimatedFloral({ className = "" }: { className?: string }) {
+  return (
+    <div className={`animated-floral ${className}`} aria-hidden="true">
+      <motion.img
+        src="/svg/spring flowers.svg"
+        alt=""
+        className="floral-svg floral-1"
+        animate={{ rotate: [-3, 3, -3], y: [0, -8, 0], scale: [1, 1.05, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.img
+        src="/svg/monoflower1.svg"
+        alt=""
+        className="floral-svg floral-2"
+        animate={{ rotate: [2, -2, 2], y: [0, -5, 0], opacity: [0.7, 1, 0.7] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+      <motion.img
+        src="/svg/leaves1 mono.svg"
+        alt=""
+        className="floral-svg floral-3"
+        animate={{ rotate: [-2, 4, -2], x: [0, 5, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
+    </div>
+  );
+}
+
+function SunlightRays() {
+  const { scrollYProgress } = useScroll();
+  const rayRotate = useTransform(scrollYProgress, [0, 1], [0, 45]);
+  const rayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.6, 0.8, 0.4]);
+
+  return (
+    <div className="sunlight-rays-container" aria-hidden="true">
+      <motion.div
+        className="sunlight-ray ray-1"
+        style={{ rotate: rayRotate, opacity: rayOpacity }}
+      />
+      <motion.div
+        className="sunlight-ray ray-2"
+        style={{ rotate: useTransform(scrollYProgress, [0, 1], [5, 50]), opacity: rayOpacity }}
+      />
+      <motion.div
+        className="sunlight-ray ray-3"
+        style={{ rotate: useTransform(scrollYProgress, [0, 1], [-5, 40]), opacity: rayOpacity }}
+      />
+      <motion.div
+        className="sunlight-glow"
+        animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </div>
+  );
+}
+
 export default function WeddingInvitationPage() {
   const [locale, setLocale] = useState<Locale>("en");
   const [entered, setEntered] = useState(DISABLE_INITIAL_INVITATION_POPUP);
@@ -546,7 +646,7 @@ export default function WeddingInvitationPage() {
       <audio ref={audioRef} src="/video/bgsong.mp3" loop preload="auto" />
       <FallingPetals />
 
-      <AnimatePresence>
+<AnimatePresence>
         {!entered && (
           <motion.section
             className="entry-gate"
@@ -554,10 +654,9 @@ export default function WeddingInvitationPage() {
             exit={{ opacity: 0, scale: 1.04, filter: "blur(16px)" }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           >
-            <video className="entry-video" autoPlay muted loop playsInline poster="/images/hero-poster.webp">
-              <source src="/video/hero-bg.mp4" type="video/mp4" />
-            </video>
+            <EntryVideoBackground />
             <div className="entry-overlay" />
+            <SunlightRays />
             <motion.div
               className="entry-aurora"
               aria-hidden="true"
@@ -565,6 +664,8 @@ export default function WeddingInvitationPage() {
               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             />
             <FloatingParticles />
+            <AnimatedFloral className="entry-floral-left" />
+            <AnimatedFloral className="entry-floral-right" />
             <LanguageSwitch locale={locale} setLocale={setLocale} />
 
             <motion.div
@@ -580,24 +681,26 @@ export default function WeddingInvitationPage() {
                 transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
               />
               <motion.div initial="hidden" animate="show" variants={revealContainer}>
-              <motion.div variants={fadeUp} className="entry-monogram">
-                <Image src="/images/kobid-shalini_2.png" alt="Kobid and Shalini" width={88} height={88} priority sizes="88px" />
-              </motion.div>
-              <motion.div variants={fadeUp} className="sacred-lines">
-                <span>{t.open.sacred1}</span>
-                <span>{t.open.sacred2}</span>
-              </motion.div>
-              <motion.p variants={fadeUp} className="eyebrow">
-                {t.open.subtitle}
-              </motion.p>
-              <motion.h1 variants={fadeUp}>{t.open.title}</motion.h1>
-              <motion.p variants={fadeUp} className="entry-summary">
-                {t.open.summary}
-              </motion.p>
-              <motion.div variants={fadeUp} className="entry-meta">
-                <span><CalendarDays size={15} /> {t.open.date}</span>
-                <span><MapPin size={15} /> {t.open.venue}</span>
-              </motion.div>
+                <motion.div variants={fadeUp} className="entry-monogram">
+                  <Image src="/images/kobid-shalini_2.png" alt="Kobid and Shalini" width={88} height={88} priority sizes="88px" />
+                </motion.div>
+                <motion.div variants={fadeUp} className="sacred-lines">
+                  <span>{t.open.sacred1}</span>
+                  <span>{t.open.sacred2}</span>
+                </motion.div>
+                <motion.p variants={fadeUp} className="eyebrow">
+                  <ShimmerText>{t.open.subtitle}</ShimmerText>
+                </motion.p>
+                <motion.h1 variants={fadeUp} className="entry-title">
+                  <ShimmerText className="title-gold">{t.open.title}</ShimmerText>
+                </motion.h1>
+                <motion.p variants={fadeUp} className="entry-summary">
+                  <ShimmerText>{t.open.summary}</ShimmerText>
+                </motion.p>
+<motion.div variants={fadeUp} className="entry-meta">
+          <span><CalendarDays size={15} /> {t.open.date}</span>
+          <span><MapPin size={15} /> {t.open.venue}</span>
+        </motion.div>
               <motion.div variants={fadeUp} className="entry-vow-line" aria-hidden="true">
                 <span />
                 <Heart size={14} fill="currentColor" />
@@ -916,23 +1019,23 @@ export default function WeddingInvitationPage() {
               </motion.div>
             </section>
 
-      <footer className="footer-section">
+<footer className="footer-section">
+        <p>{t.footer.quote}</p>
+        <Heart size={18} fill="currentColor" />
+        <small>{t.footer.signOff}</small>
+        <strong>{t.footer.family}</strong>
+        <span>{t.footer.couple}</span>
         <div className="footer-monogram-wrap">
           <Image
             src="/images/kobid-shalini_2.png"
             alt="Kobid & Shalini"
             className="footer-logo-img"
-            width={94}
-            height={94}
-            sizes="94px"
+            width={188}
+            height={188}
+            sizes="188px"
           />
         </div>
-              <p>{t.footer.quote}</p>
-              <Heart size={18} fill="currentColor" />
-              <small>{t.footer.signOff}</small>
-              <strong>{t.footer.family}</strong>
-              <span>{t.footer.couple}</span>
-            </footer>
+      </footer>
           </motion.div>
         )}
       </AnimatePresence>

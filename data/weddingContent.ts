@@ -185,9 +185,9 @@ export const weddingContent = {
       heading: "हर प्रेम कहानी सुंदर होती है, पर हमारी कहानी आशीर्वादों से शुरू होती है।",
       body: "श्री श्री राधा गोबिंद और परिवारों के आशीर्वाद से कोबिद और शालिनी प्रेम, साथ और जीवनभर की संगति की सुंदर यात्रा शुरू कर रहे हैं। इस नए अध्याय में आप सभी को सम्मिलित होकर नवदंपति को आशीर्वाद देने और आनंदपूर्ण संध्या मनाने का सादर निमंत्रण है।",
       cards: [
-        { number: "01", title: "शुभ आरंभ", text: "परिवार, आस्था और प्रेम से सजी यात्रा।", image: "/images/story-1-photo.webp" },
-        { number: "02", title: "दो परिवार, एक उत्सव", text: "एक सुंदर बंधन को आशीर्वाद देने का मिलन।", image: "/images/story-2-photo.webp" },
-        { number: "03", title: "सदा साथ", text: "प्रेम, हँसी, आशीर्वाद और अपनापन।", image: "/images/story-3-photo.webp" }
+        { number: "01", title: "शुभ आरंभ", text: "परिवार, आस्था और प्रेम से सजी यात्रा।", image: "/images/gallery/memories-moments/big/img1.JPG" },
+        { number: "02", title: "दो परिवार, एक उत्सव", text: "एक सुंदर बंधन को आशीर्वाद देने का मिलन।", image: "/images/gallery/memories-moments/big/img5.JPG" },
+        { number: "03", title: "सदा साथ", text: "प्रेम, हँसी, आशीर्वाद और अपनापन।", image: "/images/gallery/memories-moments/big/img10.jpg" }
       ]
     },
     timeline: {
@@ -279,9 +279,9 @@ export const weddingContent = {
       heading: "প্রতিটি প্রেমের গল্প সুন্দর, কিন্তু আমাদের গল্প শুরু আশীর্বাদ দিয়ে।",
       body: "শ্রী শ্রী রাধা গোবিন্দ ও পরিবারের আশীর্বাদে কোবিদ ও শালিনী ভালোবাসা, সহযাত্রা ও সারাজীবনের বন্ধনের নতুন অধ্যায় শুরু করছেন। এই আনন্দের সন্ধ্যায় আপনাকে সঙ্গে পেয়ে নবদম্পতিকে আশীর্বাদ জানাতে আমরা আন্তরিকভাবে আমন্ত্রণ জানাই।",
       cards: [
-        { number: "01", title: "শুভ সূচনা", text: "পরিবার, বিশ্বাস ও ভালোবাসায় সাজানো যাত্রা।", image: "/images/story-1-photo.webp" },
-        { number: "02", title: "দুই পরিবার, এক আনন্দ", text: "এক সুন্দর বন্ধনকে আশীর্বাদ করার মিলন।", image: "/images/story-2-photo.webp" },
-        { number: "03", title: "চিরদিনের শুরু", text: "ভালোবাসা, হাসি, আশীর্বাদ ও আপনজনের সন্ধ্যা।", image: "/images/story-3-photo.webp" }
+        { number: "01", title: "শুভ সূচনা", text: "পরিবার, বিশ্বাস ও ভালোবাসায় সাজানো যাত্রা।", image: "/images/gallery/memories-moments/big/img1.JPG" },
+        { number: "02", title: "দুই পরিবার, এক আনন্দ", text: "এক সুন্দর বন্ধনকে আশীর্বাদ করার মিলন।", image: "/images/gallery/memories-moments/big/img5.JPG" },
+        { number: "03", title: "চিরদিনের শুরু", text: "ভালোবাসা, হাসি, আশীর্বাদ ও আপনজনের সন্ধ্যা।", image: "/images/gallery/memories-moments/big/img10.jpg" }
       ]
     },
     timeline: {
