@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kobid-shalini-wedding.netlify.app/sitemap.xml

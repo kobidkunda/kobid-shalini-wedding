@@ -212,7 +212,7 @@ function ParallaxGalleryItem({ src, index, caption }: { src: string; index: numb
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
     >
       <motion.div className="gallery-item-image" whileHover={{ scale: 1.065 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
-        <Image src={src} alt={`Wedding gallery placeholder ${index + 1}`} fill sizes="(max-width: 760px) 50vw, 22vw" />
+        <Image src={src} alt={`Kobid and Shalini wedding photo ${index + 1}`} fill sizes="(max-width: 760px) 50vw, 22vw" />
       </motion.div>
       {caption ? <figcaption>{caption}</figcaption> : null}
     </motion.figure>
@@ -941,7 +941,7 @@ export default function WeddingInvitationPage() {
                   </motion.article>
                 ))}
                 <motion.article className="map-card" variants={fadeUp}>
-                  <img src="/images/map-placeholder.svg" alt="Map placeholder" />
+                  <img src="/images/map-placeholder.svg" alt="Map showing venue location at BIOLASTIC, Siliguri" />
                   <a href="https://maps.google.com/?q=BIOLASTIC%20Sukantapally%20Ward%20No%2033%20Siliguri" target="_blank" rel="noreferrer">
                     {t.venue.button}
                   </a>
