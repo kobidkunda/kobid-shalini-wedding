@@ -1,5 +1,9 @@
 import { getStore } from "@netlify/blobs";
 
+function isMissingNetlifyBlobsConfig(err: unknown) {
+  return err instanceof Error && err.message.includes("environment has not been configured to use Netlify Blobs");
+}
+
 function getGalleryStore() {
   return getStore("gallery-images");
 }
@@ -15,15 +19,25 @@ export interface GalleryMeta {
 }
 
 export async function getUploadedImages(): Promise<GalleryMeta[]> {
-  const metaStore = getMetaStore();
-  const raw = await metaStore.get("list", { type: "text" });
-  if (!raw) return [];
-  return JSON.parse(raw);
+  try {
+    const metaStore = getMetaStore();
+    const raw = await metaStore.get("list", { type: "text" });
+    if (!raw) return [];
+    return JSON.parse(raw);
+  } catch (err) {
+    if (isMissingNetlifyBlobsConfig(err)) return [];
+    throw err;
+  }
 }
 
 export async function saveUploadedImages(list: GalleryMeta[]) {
-  const metaStore = getMetaStore();
-  await metaStore.set("list", JSON.stringify(list));
+  try {
+    const metaStore = getMetaStore();
+    await metaStore.set("list", JSON.stringify(list));
+  } catch (err) {
+    if (isMissingNetlifyBlobsConfig(err)) return;
+    throw err;
+  }
 }
 
 export { getGalleryStore };

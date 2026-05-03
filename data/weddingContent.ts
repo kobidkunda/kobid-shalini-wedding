@@ -14,7 +14,8 @@ export const weddingContent = {
     venueName: "BIOLASTIC",
     venueAddress: "Sukantapally, Ward No. 33, Siliguri – 734005",
     brideAddress: "Basundhara Abasan, “A” Block, Behind Uttor Kanya, Siliguri – 734015",
-    monogram: "K / S"
+    monogram: "K / S",
+    storyVideoUrl: "https://youtu.be/ekeMCU97bw0"
   },
 
   en: {

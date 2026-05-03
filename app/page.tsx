@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTra
 import Image from "next/image";
 import {
   CalendarDays,
+  Camera,
   ChevronDown,
   Clock3,
   Expand,
@@ -21,7 +22,8 @@ import {
   Sparkles,
   UsersRound,
   Volume2,
-  VolumeX
+  VolumeX,
+  X
 } from "lucide-react";
 import { galleryImages, GalleryImage, Locale, locales, memoriesMomentsImages, weddingContent } from "@/data/weddingContent";
 
@@ -56,7 +58,6 @@ const letterReveal = {
 const glowTap = { scale: 0.97 };
 
 const DISABLE_INITIAL_INVITATION_POPUP = false;
-
 const dustParticles = [
   { left: 7, top: 22, delay: 0.2, duration: 8, drift: 12, size: 3 },
   { left: 14, top: 78, delay: 1.4, duration: 9, drift: -10, size: 2 },
@@ -270,6 +271,217 @@ function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.35 });
   return <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />;
+}
+
+function getYouTubeVideoId(url: string) {
+  if (!url) return "";
+
+  try {
+    const parsed = new URL(url);
+
+    if (parsed.hostname.includes("youtu.be")) {
+      return parsed.pathname.split("/").filter(Boolean)[0] || "";
+    }
+
+    if (parsed.pathname.startsWith("/shorts/") || parsed.pathname.startsWith("/embed/")) {
+      return parsed.pathname.split("/").filter(Boolean)[1] || "";
+    }
+
+    return parsed.searchParams.get("v") || "";
+  } catch {
+    return "";
+  }
+}
+
+function getYouTubeEmbedUrl(url: string, mode: "modal" | "inline" = "modal") {
+  const videoId = getYouTubeVideoId(url);
+  if (!videoId) return "";
+
+  const params = new URLSearchParams({
+    feature: "oembed",
+    rel: "0",
+    modestbranding: "1",
+    playsinline: "1"
+  });
+
+  if (mode === "inline") {
+    params.set("autoplay", "1");
+    params.set("mute", "1");
+    params.set("controls", "1");
+  } else {
+    params.set("autoplay", "1");
+  }
+
+  return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+}
+
+function getYouTubeWatchUrl(url: string) {
+  const videoId = getYouTubeVideoId(url);
+  return videoId ? `https://www.youtube.com/watch?v=${videoId}` : url;
+}
+
+function getYouTubeThumbnailUrl(url: string) {
+  const videoId = getYouTubeVideoId(url);
+  return videoId ? `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg` : "";
+}
+
+function StoryVideoModal({ open, videoUrl, onClose }: { open: boolean; videoUrl: string; onClose: () => void }) {
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const embedUrl = open ? getYouTubeEmbedUrl(videoUrl) : "";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [open, onClose]);
+
+  useEffect(() => {
+    if (!open) return;
+    const requestFullscreen = async () => {
+      try {
+        const el = overlayRef.current as (HTMLDivElement & { webkitRequestFullscreen?: () => Promise<void> }) | null;
+        if (el?.requestFullscreen) await el.requestFullscreen();
+        else if (el?.webkitRequestFullscreen) await el.webkitRequestFullscreen();
+      } catch {
+        // Fullscreen is optional; the overlay still fills the viewport.
+      }
+    };
+    requestFullscreen();
+  }, [open]);
+
+  const close = async () => {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+    } catch {
+      // Ignore browser fullscreen exit failures.
+    }
+    onClose();
+  };
+
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.target === overlayRef.current) close();
+  };
+
+  const modal = (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          ref={overlayRef}
+          className="story-video-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.24 }}
+          onClick={handleOverlayClick}
+        >
+          <motion.div
+            className="story-video-shell"
+            initial={{ opacity: 0, scale: 0.94, y: 18 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.94, y: 18 }}
+            transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <button className="story-video-close" onClick={close} type="button" aria-label="Close story video">
+              <X size={24} />
+            </button>
+            {embedUrl ? (
+              <iframe
+                title="Kobid and Shalini story video"
+                src={embedUrl}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            ) : (
+              <div className="story-video-empty">Video link missing</div>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
+  return mounted ? createPortal(modal, document.body) : null;
+}
+
+function CinematicVideoFeature({ videoUrl }: { videoUrl: string }) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const reduceMotion = useReducedMotion();
+  const watchUrl = getYouTubeWatchUrl(videoUrl);
+  const thumbnailUrl = getYouTubeThumbnailUrl(videoUrl);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+  const easedProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 28, mass: 0.42 });
+  const frameScale = useTransform(easedProgress, [0, 0.42, 1], reduceMotion ? [1, 1, 1] : [0.86, 1, 0.94]);
+  const frameY = useTransform(easedProgress, [0, 0.48, 1], reduceMotion ? [0, 0, 0] : [84, 0, -76]);
+  const frameRotateX = useTransform(easedProgress, [0, 0.42, 1], reduceMotion ? [0, 0, 0] : [9, 0, -4]);
+  const glowOpacity = useTransform(easedProgress, [0, 0.35, 0.72, 1], [0.12, 0.78, 0.48, 0.12]);
+  const haloScale = useTransform(easedProgress, [0, 0.5, 1], reduceMotion ? [1, 1, 1] : [0.72, 1.08, 0.9]);
+  const captionY = useTransform(easedProgress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [26, -10, -24]);
+
+  return (
+    <section ref={sectionRef} className="cinema-video-section" aria-label="Kobid and Shalini wedding film">
+      <motion.div className="cinema-ambient-orb orb-one" style={{ opacity: glowOpacity, scale: haloScale }} aria-hidden="true" />
+      <motion.div className="cinema-ambient-orb orb-two" style={{ opacity: glowOpacity }} aria-hidden="true" />
+      <div className="cinema-ribbon" aria-hidden="true" />
+      <GoldenDust className="cinema-dust" />
+
+      <motion.div
+        className="cinema-copy"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.35 }}
+        variants={revealContainer}
+        style={{ y: captionY }}
+      >
+        <motion.p variants={fadeUp} className="eyebrow small">
+          <Play size={14} fill="currentColor" /> Wedding Film
+        </motion.p>
+        <motion.h2 variants={fadeUp}>A love story before the details.</motion.h2>
+        <motion.p variants={fadeUp}>
+          Watch the moment breathe across the screen, then scroll into the celebration details.
+        </motion.p>
+      </motion.div>
+
+      <motion.div
+        className="cinema-frame-wrap"
+        style={{ scale: frameScale, y: frameY, rotateX: frameRotateX }}
+        initial={{ opacity: 0, filter: "blur(20px)" }}
+        whileInView={{ opacity: 1, filter: "blur(0px)" }}
+        viewport={{ once: true, amount: 0.28 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <a className="cinema-frame cinema-youtube-card" href={watchUrl} target="_blank" rel="noreferrer" aria-label="Watch Kobid and Shalini wedding film on YouTube">
+          <div className="cinema-frame-glass" aria-hidden="true" />
+          {thumbnailUrl ? <img src={thumbnailUrl} alt="Kobid and Shalini wedding film thumbnail" /> : null}
+          <span className="cinema-poster-shade" aria-hidden="true" />
+          <span className="cinema-play-button" aria-hidden="true">
+            <span className="cinema-play-ring" />
+            <Play size={42} fill="currentColor" />
+          </span>
+          <span className="cinema-watch-copy">
+            <small>Opens on YouTube</small>
+            <strong>Watch the wedding film</strong>
+          </span>
+        </a>
+      </motion.div>
+    </section>
+  );
 }
 
 function GalleryModal({ selected, onClose }: { selected: GalleryImage | null; onClose: () => void }) {
@@ -564,6 +776,7 @@ export default function WeddingInvitationPage() {
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [rsvpSent, setRsvpSent] = useState(false);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [storyVideoOpen, setStoryVideoOpen] = useState(false);
   const [uploadedImages, setUploadedImages] = useState<GalleryImage[]>([]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const heroRef = useRef<HTMLElement | null>(null);
@@ -596,6 +809,7 @@ export default function WeddingInvitationPage() {
     { label: t.story.label, href: "#story" },
     { label: t.details.label, href: "#details" },
     { label: t.gallery.label, href: "#gallery" },
+    { label: "Face Register", href: "/face_redgister" },
     { label: t.nav[t.nav.length - 1], href: "#rsvp" }
   ];
   const countdown = useCountdown(meta.dateISO);
@@ -658,10 +872,19 @@ export default function WeddingInvitationPage() {
     setRsvpSent(true);
   };
 
+  const openStoryVideo = () => {
+    setStoryVideoOpen(true);
+    if (audioRef.current && audioPlaying) {
+      audioRef.current.pause();
+      setAudioPlaying(false);
+    }
+  };
+
   return (
     <main className="site-shell">
       <ScrollProgress />
       <audio ref={audioRef} src="/video/bgsong.mp3" loop preload="auto" />
+      <StoryVideoModal open={storyVideoOpen} videoUrl={weddingContent.meta.storyVideoUrl} onClose={() => setStoryVideoOpen(false)} />
       <FallingPetals />
 
 <AnimatePresence>
@@ -835,6 +1058,9 @@ export default function WeddingInvitationPage() {
                   <motion.div variants={fadeUp} className="hero-actions">
                     <motion.a href="#story" className="gold-button motion-cta" whileHover={{ y: -4, scale: 1.025 }} whileTap={glowTap}>{t.hero.primary}</motion.a>
                     <motion.a href="#rsvp" className="ghost-button motion-cta" whileHover={{ y: -4, scale: 1.025 }} whileTap={glowTap}>{t.hero.secondary} <Heart size={16} /></motion.a>
+                    <motion.a href="/face_redgister" className="ghost-button face-register-hero-link motion-cta" whileHover={{ y: -4, scale: 1.025 }} whileTap={glowTap}>
+                      Register Your Face <Camera size={16} />
+                    </motion.a>
                   </motion.div>
                 </motion.div>
 
@@ -848,19 +1074,26 @@ export default function WeddingInvitationPage() {
                     priority
                     sizes="(max-width: 1080px) 82vw, 48vw"
                   />
-                  <div className="watch-card">
-                    <button type="button" aria-label="Play story">
+                  <motion.button
+                    className="watch-card"
+                    onClick={openStoryVideo}
+                    type="button"
+                    aria-label={`${t.hero.watchTitle}: ${t.hero.watchSub}`}
+                    whileHover={{ y: -4, scale: 1.025 }}
+                    whileTap={glowTap}
+                  >
+                    <span className="watch-play" aria-hidden="true">
                       <motion.span
                         className="play-pulse"
                         animate={{ scale: [1, 1.45, 1], opacity: [0.55, 0, 0.55] }}
                         transition={{ duration: 2.8, repeat: Infinity, ease: "easeOut" }}
                       />
                       <Play size={28} fill="currentColor" />
-                    </button>
+                    </span>
                     <strong>{t.hero.watchTitle}</strong>
                     <span>{t.hero.watchSub}</span>
                     <small>{t.hero.duration}</small>
-                  </div>
+                  </motion.button>
                 </motion.div>
               </div>
 
@@ -951,6 +1184,8 @@ export default function WeddingInvitationPage() {
         </motion.div>
         <GalleryModal selected={selectedImage} onClose={() => setSelectedImage(null)} />
       </section>
+
+            <CinematicVideoFeature videoUrl={weddingContent.meta.storyVideoUrl} />
 
             <section id="details" className="section details-section">
               <SectionTitle label={t.details.label} />
@@ -1043,6 +1278,16 @@ export default function WeddingInvitationPage() {
             </section>
 
             <section className="section calendar-section">
+<motion.div className="face-invite-strip" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.28 }} variants={revealContainer}>
+              <motion.div variants={fadeUp} className="face-invite-copy">
+                <p className="eyebrow small"><Camera size={14} /> Register Your Face</p>
+                <h2>Let your wedding photos find you later.</h2>
+                <p>Upload one clear front-facing photo with your name, WhatsApp, and email. After the celebration, matching gallery photos can be shared with you easily over WhatsApp or email.</p>
+              </motion.div>
+              <motion.a variants={fadeUp} href="/face_redgister" className="gold-button face-invite-button motion-cta" whileHover={{ y: -4, scale: 1.025 }} whileTap={glowTap}>
+                Register Your Face <Camera size={17} />
+              </motion.a>
+            </motion.div>
 <motion.div className="calendar-links" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} variants={revealContainer}>
               <motion.p variants={fadeUp} className="calendar-links-label">Add to your calendar</motion.p>
               <motion.div variants={fadeUp} className="calendar-links-row">
