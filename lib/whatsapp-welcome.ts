@@ -40,11 +40,6 @@ function getWhatsAppHeaders(extra?: HeadersInit): HeadersInit {
     "User-Agent": "Kobid-Shalini-Wedding/1.0 (+https://kobid-shalini-wedding.netlify.app)",
   };
 
-  if (process.env.WHATSAPP_MCP_API_KEY) {
-    headers.Authorization = `Bearer ${process.env.WHATSAPP_MCP_API_KEY}`;
-    headers["x-api-key"] = process.env.WHATSAPP_MCP_API_KEY;
-  }
-
   return {
     ...headers,
     ...extra,
