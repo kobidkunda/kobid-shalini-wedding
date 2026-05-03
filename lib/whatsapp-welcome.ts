@@ -37,7 +37,7 @@ function getWhatsAppAccountPhone() {
 function getWhatsAppHeaders(extra?: HeadersInit): HeadersInit {
   const headers: Record<string, string> = {
     Accept: "application/json",
-    "User-Agent": "Kobid-Shalini-Wedding/1.0 (+https://kobid-shalini-wedding.netlify.app)",
+    "User-Agent": "python-requests/2.28.0",
   };
 
   return {
